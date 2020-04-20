@@ -1,7 +1,6 @@
 ﻿from flask import Flask,request,make_response
 import json
 import os
-from Send_Email import EmailSender
 import pandas as pd
 import smtplib
 from email.mime.multipart import MIMEMultipart
