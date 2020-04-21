@@ -105,7 +105,7 @@ def makeWebhookResult(req):
             speech = "The number of states affected with corona virus in India is " + str(cnt_states) + "." + "The state with least cases is " + state_aff_least
         else:
             cnt_cntries = df_world.shape[0]
-            cntry_aff_least = df_world.iloc[df_world['Total_Cases'].argmax()]
+            cntry_aff_least = df_world.iloc[df_world['Total_Cases'].argmin()]
             cntry_aff_least = cntry_aff_least['Country']
             speech = "The number of countries impacted all over the world is " + str(cnt_cntries) + "." + "The country with least cases is " + cntry_aff_least
 
