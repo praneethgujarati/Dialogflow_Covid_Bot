@@ -1,7 +1,13 @@
 from flask import Flask,request,make_response
 import json
 import os
+from Send_Email import EmailSender
 import pandas as pd
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 
 
 app = Flask(__name__)
@@ -94,6 +100,21 @@ def makeWebhookResult(req):
             cntry_aff_most = df_world.iloc[df_world['Total_Cases'].argmax()]
             cntry_aff_most = cntry_aff_most['Country']
             speech = "The number of countries impacted all over the world is " + str(cnt_cntries)+ "." + "The country with most cases is " + cntry_aff_most
+    elif(intent == 'Summary_Lowest'):
+        smry_param_low = query_response.get("queryText")
+        smry_param_low = query_response.get('parameters', None)
+        smry_low = parameters.get('summary', None)
+        if (smry == 'states'):
+            cnt_states = df_state.shape[0]
+            state_aff_least = df_state.iloc[df_state['Confirmed'].argmin()]
+            state_aff_least = state_aff_least['State']
+            speech = "The number of states affected with corona virus in India is " + str(cnt_states) + "." + "The state with least cases is " + state_aff_least
+        else:
+            cnt_cntries = df_world.shape[0]
+            cntry_aff_least = df_world.iloc[df_world['Total_Cases'].argmax()]
+            cntry_aff_least = cntry_aff_least['Country']
+            speech = "The number of countries impacted all over the world is " + str(cnt_cntries) + "." + "The country with least cases is " + cntry_aff_least
+
     print(speech)
     return {
         "speech": speech,
