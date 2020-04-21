@@ -98,7 +98,7 @@ def makeWebhookResult(req):
         smry_param_low = query_response.get("queryText")
         smry_param_low = query_response.get('parameters', None)
         smry_low = parameters.get('summary', None)
-        if (smry == 'states'):
+        if (smry_low == 'states'):
             cnt_states = df_state.shape[0]
             state_aff_least = df_state.iloc[df_state['Confirmed'].argmin()]
             state_aff_least = state_aff_least['State']
